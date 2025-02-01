@@ -28,25 +28,15 @@ cpd_historical = TabularCPD(
     variable="historical_congestion_level",
     variable_card=3,
     values=[
-       
-       # LOW
-       [
-         0.80, 0.10, 0.80, 0.10, 0.90, 0.15,  # sunny-morning/afternoon/evening x accident=[no,yes]
-         0.60, 0.05, 0.60, 0.05, 0.70, 0.10,  # rainy-morning/afternoon/evening x accident=[no,yes]
-         0.70, 0.10, 0.70, 0.10, 0.80, 0.15   # foggy-morning/afternoon/evening x accident=[no,yes]
-       ],
-       # MEDIUM
-       [
-         0.15, 0.20, 0.15, 0.20, 0.08, 0.25,
-         0.25, 0.15, 0.25, 0.15, 0.20, 0.20,
-         0.20, 0.15, 0.20, 0.15, 0.15, 0.20
-       ],
-       # HIGH
-       [
-         0.05, 0.70, 0.05, 0.70, 0.02, 0.60,
-         0.15, 0.80, 0.15, 0.80, 0.10, 0.70,
-         0.10, 0.75, 0.10, 0.75, 0.05, 0.65
-       ]
+        # No Accident (original probabilities)
+        [0.6, 0.8, 0.7, 0.4, 0.3, 0.35, 0.5, 0.6, 0.55,  # High (no accident)
+         0.5, 0.7, 0.6, 0.3, 0.2, 0.25, 0.4, 0.5, 0.45], # High (accident)
+        
+        [0.3, 0.15, 0.2, 0.4, 0.5, 0.45, 0.4, 0.3, 0.35,  # Medium (no accident)
+         0.35, 0.2, 0.25, 0.45, 0.55, 0.5, 0.45, 0.35, 0.4], # Medium (accident)
+        
+        [0.1, 0.05, 0.1, 0.2, 0.2, 0.2, 0.1, 0.1, 0.1,    # Low (no accident)
+         0.15, 0.1, 0.15, 0.25, 0.25, 0.25, 0.15, 0.15, 0.15]  # Low (accident)
     ],
     evidence=["weather", "time_of_day", "accident"],
     evidence_card=[3, 3, 2],
@@ -62,9 +52,9 @@ cpd_current = TabularCPD(
     variable="current_congestion_level",
     variable_card=3,
     values=[
-        [0.5, 0.25, 0.1],  # P(current=low | historical=low/medium/high)
-        [0.4, 0.5, 0.4],  # P(current=medium | historical=low/medium/high)
-        [0.1, 0.25, 0.5]   # P(current=high | historical=low/medium/high)
+        [0.0, 0.1, 0.3],  # Low
+        [0.1, 0.3, 0.4],  # Medium
+        [0.9, 0.6, 0.3]   # High
     ],
     evidence=["historical_congestion_level"],
     evidence_card=[3],
