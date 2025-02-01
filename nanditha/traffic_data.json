@@ -5,7 +5,8 @@
         "speed": 75,
         "speed_limit": 60,
         "signal": "Red",
-        "locations": ["Intersection"]
+        "locations": ["Intersection"],
+        "road_type": "Normal"
     },
     {
         "id": "Bus1",
@@ -13,7 +14,8 @@
         "speed": 55,
         "speed_limit": 50,
         "signal": "Green",
-        "locations": ["Highway"]
+        "locations": ["Highway"],
+        "road_type": "Highway"
     },
     {
         "id": "Bike1",
@@ -21,7 +23,8 @@
         "speed": 90,
         "speed_limit": 80,
         "signal": "Red",
-        "locations": ["Intersection"]
+        "locations": ["Intersection"],
+        "road_type": "Normal"
     },
     {
         "id": "Lorry1",
@@ -29,7 +32,8 @@
         "speed": 85,
         "speed_limit": 70,
         "signal": "Green",
-        "locations": ["Highway", "Checkpoint"]
+        "locations": ["Highway", "Checkpoint"],
+        "road_type": "Highway"
     },
     {
         "id": "Car2",
@@ -37,7 +41,8 @@
         "speed": 50,
         "speed_limit": 50,
         "signal": "Green",
-        "locations": ["Location1", "Location2"]
+        "locations": ["Location1", "Location2"],
+        "road_type": "School"
     },
     {
         "id": "Bus2",
@@ -45,7 +50,8 @@
         "speed": 75,
         "speed_limit": 60,
         "signal": "Red",
-        "locations": ["Intersection"]
+        "locations": ["Intersection"],
+        "road_type": "Normal"
     },
     {
         "id": "Bike2",
@@ -53,6 +59,7 @@
         "speed": 100,
         "speed_limit": 80,
         "signal": "Green",
-        "locations": ["Highway"]
+        "locations": ["Highway"],
+        "road_type": "Highway"
     }
 ]

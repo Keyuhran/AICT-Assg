@@ -1,5 +1,5 @@
 import json
-from sympy import symbols, And, Implies
+from sympy import symbols, And, Or, Not, Implies
 
 class InferenceEngine:
     def __init__(self, data_file):
@@ -8,7 +8,8 @@ class InferenceEngine:
         self.setup_rules()
 
     def setup_rules(self):
-        """Defines basic traffic violation rules using simple logic."""
+        """Defines traffic violation rules using logical inference."""
+        # Defining symbols (variables in propositional logic)
         self.speed = symbols("Speed")
         self.speed_limit = symbols("Speed_Limit")
         self.speed_violation = symbols("Speed_Violation")
@@ -21,15 +22,19 @@ class InferenceEngine:
         self.location_2 = symbols("Location_2")
         self.location_violation = symbols("Location_Violation")
 
-        # Basic traffic rules
+        self.road_type = symbols("Road_Type")
+        self.school_zone = symbols("School_Zone")
+
+        # Logical rules (propositional logic)
         self.rules = [
             Implies(self.speed > self.speed_limit, self.speed_violation),  # Speeding
             Implies(And(self.signal == "Red", self.at_intersection), self.signal_violation),  # Running red light
-            Implies(And(self.location_1, self.location_2), self.location_violation)  # Being in two places at once
+            Implies(And(self.location_1, self.location_2), self.location_violation),  # Being in two places at once
+            Implies(And(self.road_type == self.school_zone, self.speed > 40), self.speed_violation)  # School zone speeding
         ]
 
     def check_violations(self):
-        """Reads traffic data and checks for violations based on predefined rules."""
+        """Reads traffic data and checks for violations based on rules."""
         with open(self.data_file, "r") as file:
             traffic_data = json.load(file)
 
@@ -42,6 +47,7 @@ class InferenceEngine:
             speed_limit = vehicle["speed_limit"]
             signal = vehicle["signal"]
             locations = vehicle["locations"]
+            road_type = vehicle.get("road_type", "Normal")
 
             # Speed Violation Check
             if speed > speed_limit:
@@ -51,12 +57,15 @@ class InferenceEngine:
             if signal == "Red" and "Intersection" in locations:
                 vehicle_violations.append("Signal Violation: Ran a red light at Intersection")
 
-            # Location Consistency Check
+            # Location Violation Check
             if len(set(locations)) > 1:
                 formatted_locations = " and ".join(locations)
                 vehicle_violations.append(f"Location Violation: Detected at {formatted_locations} simultaneously")
 
-            # Store results
+            # School Zone Speed Violation Check
+            if road_type == "School" and speed > 40:
+                vehicle_violations.append(f"Speed Violation in School Zone: {speed} km/h (Limit: 40 km/h)")
+
             if vehicle_violations:
                 violations.append({vehicle_id: vehicle_violations})
 
