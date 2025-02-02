@@ -28,11 +28,13 @@ def bfs(graph, start, goal):
 
         if current not in visited:
             visited.add(current)
-            for neighbor, _ in graph.graph[current]:
+            # Sort neighbors to maintain expected order
+            for neighbor, _ in sorted(graph.graph[current]):
                 if neighbor not in visited:
                     queue.append((neighbor, path + [neighbor]))
 
     return None
+
 
 # DFS implementation
 def dfs(graph, start, goal):
