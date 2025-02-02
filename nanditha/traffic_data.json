@@ -1,65 +1,146 @@
 [
     {
-        "id": "Car1",
-        "type": "Car",
-        "speed": 75,
-        "speed_limit": 60,
-        "signal": "Red",
-        "locations": ["Intersection"],
-        "road_type": "Normal"
+        "Driver": "Ethan",
+        "Day": 1,
+        "Road_Type": "Normal",
+        "Speed_Limit": 60,
+        "Speed": 75,
+        "Violation": "Yes"
     },
     {
-        "id": "Bus1",
-        "type": "Bus",
-        "speed": 55,
-        "speed_limit": 50,
-        "signal": "Green",
-        "locations": ["Highway"],
-        "road_type": "Highway"
+        "Driver": "Ethan",
+        "Day": 2,
+        "Road_Type": "School",
+        "Speed_Limit": 40,
+        "Speed": 45,
+        "Violation": "No"
     },
     {
-        "id": "Bike1",
-        "type": "Motorbike",
-        "speed": 90,
-        "speed_limit": 80,
-        "signal": "Red",
-        "locations": ["Intersection"],
-        "road_type": "Normal"
+        "Driver": "Ethan",
+        "Day": 3,
+        "Road_Type": "Remote",
+        "Speed_Limit": "No Limit",
+        "Speed": 50,
+        "Violation": "No"
     },
     {
-        "id": "Lorry1",
-        "type": "Lorry",
-        "speed": 85,
-        "speed_limit": 70,
-        "signal": "Green",
-        "locations": ["Highway", "Checkpoint"],
-        "road_type": "Highway"
+        "Driver": "Sarah",
+        "Day": 1,
+        "Road_Type": "Highway",
+        "Speed_Limit": 90,
+        "Speed": 110,
+        "Violation": "Yes"
     },
     {
-        "id": "Car2",
-        "type": "Car",
-        "speed": 50,
-        "speed_limit": 50,
-        "signal": "Green",
-        "locations": ["Location1", "Location2"],
-        "road_type": "School"
+        "Driver": "Sarah",
+        "Day": 2,
+        "Road_Type": "School",
+        "Speed_Limit": 40,
+        "Speed": 38,
+        "Violation": "No"
     },
     {
-        "id": "Bus2",
-        "type": "Bus",
-        "speed": 75,
-        "speed_limit": 60,
-        "signal": "Red",
-        "locations": ["Intersection"],
-        "road_type": "Normal"
+        "Driver": "Sarah",
+        "Day": 3,
+        "Road_Type": "Normal",
+        "Speed_Limit": 60,
+        "Speed": 55,
+        "Violation": "No"
     },
     {
-        "id": "Bike2",
-        "type": "Motorbike",
-        "speed": 100,
-        "speed_limit": 80,
-        "signal": "Green",
-        "locations": ["Highway"],
-        "road_type": "Highway"
+        "Driver": "John",
+        "Day": 1,
+        "Road_Type": "Normal",
+        "Speed_Limit": 60,
+        "Speed": 65,
+        "Violation": "Yes"
+    },
+    {
+        "Driver": "John",
+        "Day": 2,
+        "Road_Type": "Highway",
+        "Speed_Limit": 90,
+        "Speed": 85,
+        "Violation": "No"
+    },
+    {
+        "Driver": "John",
+        "Day": 3,
+        "Road_Type": "School",
+        "Speed_Limit": 40,
+        "Speed": 50,
+        "Violation": "Yes"
+    },
+    {
+        "Driver": "Liam",
+        "Day": 1,
+        "Road_Type": "Normal",
+        "Speed_Limit": 60,
+        "Speed": 50,
+        "Violation": "No"
+    },
+    {
+        "Driver": "Liam",
+        "Day": 2,
+        "Road_Type": "School",
+        "Speed_Limit": 40,
+        "Speed": 42,
+        "Violation": "Yes"
+    },
+    {
+        "Driver": "Liam",
+        "Day": 3,
+        "Road_Type": "Highway",
+        "Speed_Limit": 90,
+        "Speed": 95,
+        "Violation": "No"
+    },
+    {
+        "Driver": "Sophia",
+        "Day": 1,
+        "Road_Type": "Remote",
+        "Speed_Limit": "No Limit",
+        "Speed": 80,
+        "Violation": "No"
+    },
+    {
+        "Driver": "Sophia",
+        "Day": 2,
+        "Road_Type": "Normal",
+        "Speed_Limit": 60,
+        "Speed": 70,
+        "Violation": "Yes"
+    },
+    {
+        "Driver": "Sophia",
+        "Day": 3,
+        "Road_Type": "School",
+        "Speed_Limit": 40,
+        "Speed": 45,
+        "Violation": "Yes"
+    },
+    {
+        "Driver": "Daniel",
+        "Day": 1,
+        "Road_Type": "Highway",
+        "Speed_Limit": 90,
+        "Speed": 100,
+        "Violation": "Yes"
+    },
+    {
+        "Driver": "Daniel",
+        "Day": 2,
+        "Road_Type": "School",
+        "Speed_Limit": 40,
+        "Speed": 39,
+        "Violation": "No"
+    },
+    {
+        "Driver": "Daniel",
+        "Day": 3,
+        "Road_Type": "Normal",
+        "Speed_Limit": 60,
+        "Speed": 65,
+        "Violation": "Yes"
     }
 ]
