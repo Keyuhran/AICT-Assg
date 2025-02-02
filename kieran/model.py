@@ -2,11 +2,11 @@ from pgmpy.models import BayesianNetwork
 from pgmpy.factors.discrete import TabularCPD
 from pgmpy.inference import VariableElimination
 
-# Define the Bayesian Network with the new variable "accident"
+# Define the Bayesian Network structure
 model = BayesianNetwork([
     ("weather", "historical_congestion_level"),
     ("time_of_day", "historical_congestion_level"),
-    ("accident", "historical_congestion_level"),  # New dependency
+    ("accident", "historical_congestion_level"),  
     ("historical_congestion_level", "current_congestion_level")
 ])
 
