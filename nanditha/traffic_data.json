@@ -1,11 +1,13 @@
-[
+ [
     {
         "Driver": "Ethan",
         "Day": 1,
         "Road_Type": "Normal",
         "Speed_Limit": 60,
         "Speed": 75,
-        "Violation": "Yes"
+        "Signal": "Green",
+        "Locations": ["Intersection"],
+        "Violation": "Speeding"
     },
     {
         "Driver": "Ethan",
@@ -13,7 +15,9 @@
         "Road_Type": "School",
         "Speed_Limit": 40,
         "Speed": 45,
-        "Violation": "No"
+        "Signal": "Red",
+        "Locations": ["Intersection"],
+        "Violation": "Jumped Red Light"
     },
     {
         "Driver": "Ethan",
@@ -21,7 +25,9 @@
         "Road_Type": "Remote",
         "Speed_Limit": "No Limit",
         "Speed": 50,
-        "Violation": "No"
+        "Signal": "Green",
+        "Locations": ["Location1", "Location2"],
+        "Violation": "Multiple Locations"
     },
     {
         "Driver": "Sarah",
@@ -29,7 +35,9 @@
         "Road_Type": "Highway",
         "Speed_Limit": 90,
         "Speed": 110,
-        "Violation": "Yes"
+        "Signal": "Green",
+        "Locations": ["Highway"],
+        "Violation": "Speeding"
     },
     {
         "Driver": "Sarah",
@@ -37,7 +45,9 @@
         "Road_Type": "School",
         "Speed_Limit": 40,
         "Speed": 38,
-        "Violation": "No"
+        "Signal": "Green",
+        "Locations": ["School Zone"],
+        "Violation": "None"
     },
     {
         "Driver": "Sarah",
@@ -45,7 +55,9 @@
         "Road_Type": "Normal",
         "Speed_Limit": 60,
         "Speed": 55,
-        "Violation": "No"
+        "Signal": "Red",
+        "Locations": ["Intersection"],
+        "Violation": "Jumped Red Light"
     },
     {
         "Driver": "John",
@@ -53,7 +65,9 @@
         "Road_Type": "Normal",
         "Speed_Limit": 60,
         "Speed": 65,
-        "Violation": "Yes"
+        "Signal": "Green",
+        "Locations": ["Intersection"],
+        "Violation": "Speeding"
     },
     {
         "Driver": "John",
@@ -61,7 +75,9 @@
         "Road_Type": "Highway",
         "Speed_Limit": 90,
         "Speed": 85,
-        "Violation": "No"
+        "Signal": "Green",
+        "Locations": ["Highway"],
+        "Violation": "None"
     },
     {
         "Driver": "John",
@@ -69,7 +85,9 @@
         "Road_Type": "School",
         "Speed_Limit": 40,
         "Speed": 50,
-        "Violation": "Yes"
+        "Signal": "Red",
+        "Locations": ["School Zone"],
+        "Violation": "Speeding & Jumped Red Light"
     },
     {
         "Driver": "Liam",
@@ -77,7 +95,9 @@
         "Road_Type": "Normal",
         "Speed_Limit": 60,
         "Speed": 50,
-        "Violation": "No"
+        "Signal": "Green",
+        "Locations": ["City Center"],
+        "Violation": "None"
     },
     {
         "Driver": "Liam",
@@ -85,7 +105,9 @@
         "Road_Type": "School",
         "Speed_Limit": 40,
         "Speed": 42,
-        "Violation": "Yes"
+        "Signal": "Red",
+        "Locations": ["Intersection"],
+        "Violation": "Jumped Red Light"
     },
     {
         "Driver": "Liam",
@@ -93,7 +115,9 @@
         "Road_Type": "Highway",
         "Speed_Limit": 90,
         "Speed": 95,
-        "Violation": "No"
+        "Signal": "Green",
+        "Locations": ["Highway"],
+        "Violation": "None"
     },
     {
         "Driver": "Sophia",
@@ -101,7 +125,9 @@
         "Road_Type": "Remote",
         "Speed_Limit": "No Limit",
         "Speed": 80,
-        "Violation": "No"
+        "Signal": "Green",
+        "Locations": ["Forest Area"],
+        "Violation": "None"
     },
     {
         "Driver": "Sophia",
@@ -109,7 +135,9 @@
         "Road_Type": "Normal",
         "Speed_Limit": 60,
         "Speed": 70,
-        "Violation": "Yes"
+        "Signal": "Red",
+        "Locations": ["Intersection"],
+        "Violation": "Speeding & Jumped Red Light"
     },
     {
         "Driver": "Sophia",
@@ -117,7 +145,9 @@
         "Road_Type": "School",
         "Speed_Limit": 40,
         "Speed": 45,
-        "Violation": "Yes"
+        "Signal": "Green",
+        "Locations": ["School Zone"],
+        "Violation": "Speeding"
     },
     {
         "Driver": "Daniel",
@@ -125,7 +155,9 @@
         "Road_Type": "Highway",
         "Speed_Limit": 90,
         "Speed": 100,
-        "Violation": "Yes"
+        "Signal": "Green",
+        "Locations": ["Highway"],
+        "Violation": "Speeding"
     },
     {
         "Driver": "Daniel",
@@ -133,7 +165,9 @@
         "Road_Type": "School",
         "Speed_Limit": 40,
         "Speed": 39,
-        "Violation": "No"
+        "Signal": "Red",
+        "Locations": ["Intersection"],
+        "Violation": "Jumped Red Light"
     },
     {
         "Driver": "Daniel",
@@ -141,6 +175,8 @@
         "Road_Type": "Normal",
         "Speed_Limit": 60,
         "Speed": 65,
-        "Violation": "Yes"
+        "Signal": "Green",
+        "Locations": ["LocationA", "LocationB"],
+        "Violation": "Multiple Locations"
     }
 ]
