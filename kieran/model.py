@@ -1,92 +1,111 @@
-#kieran, QN3
+from pgmpy.models import BayesianNetwork
+from pgmpy.factors.discrete import TabularCPD
+from pgmpy.inference import VariableElimination
 
-from pomegranate import Node, DiscreteDistribution, ConditionalProbabilityTable, BayesianNetwork
+# Define the Bayesian Network structure
+model = BayesianNetwork([
+    ("weather", "historical_congestion_level"),
+    ("time_of_day", "historical_congestion_level"),
+    ("accident", "historical_congestion_level"),  
+    ("historical_congestion_level", "current_congestion_level")
+])
 
+# Define CPDs
+cpd_weather = TabularCPD(variable="weather", variable_card=3,
+                         values=[[0.7], [0.26], [0.04]],
+                         state_names={"weather": ["sunny", "rainy", "foggy"]})
 
-# Weather node has no parents
-Weather = Node(DiscreteDistribution({
-    "sunny": 0.7,
-    "rainy": 0.26,
-    "foggy": 0.04
-}), name="weather")
+cpd_time_of_day = TabularCPD(variable="time_of_day", variable_card=3,
+                             values=[[0.34], [0.33], [0.33]],
+                             state_names={"time_of_day": ["morning", "afternoon", "evening"]})
 
-# Time of day node has no parents
-Time_of_day = Node(DiscreteDistribution({
-    "morning": 0.34,
-    "afternoon": 0.33,
-    "evening": 0.33
-}), name="time_of_day")
+cpd_accident = TabularCPD(variable="accident", variable_card=2,
+                           values=[[0.85], [0.15]],  # 85% No accident, 15% Accident
+                           state_names={"accident": ["no", "yes"]})
 
-# Historical congestion level node depends on Weather and Time_of_day
-Historical_congestion_level = Node(ConditionalProbabilityTable([
-    ["rainy", "morning", "high", 0.6],
-    ["rainy", "morning", "medium", 0.3],
-    ["rainy", "morning", "low", 0.1],
-    ["rainy", "afternoon", "high", 0.8],
-    ["rainy", "afternoon", "medium", 0.15],
-    ["rainy", "afternoon", "low", 0.05],
-    ["rainy", "evening", "high", 0.7],
-    ["rainy", "evening", "medium", 0.2],
-    ["rainy", "evening", "low", 0.1],
-    ["sunny", "morning", "high", 0.4],
-    ["sunny", "morning", "medium", 0.4],
-    ["sunny", "morning", "low", 0.2],
-    ["sunny", "afternoon", "high", 0.3],
-    ["sunny", "afternoon", "medium", 0.5],
-    ["sunny", "afternoon", "low", 0.2],
-    ["sunny", "evening", "high", 0.35],
-    ["sunny", "evening", "medium", 0.45],
-    ["sunny", "evening", "low", 0.2],
-    ["foggy", "morning", "high", 0.5],
-    ["foggy", "morning", "medium", 0.4],
-    ["foggy", "morning", "low", 0.1],
-    ["foggy", "afternoon", "high", 0.6],
-    ["foggy", "afternoon", "medium", 0.3],
-    ["foggy", "afternoon", "low", 0.1],
-    ["foggy", "evening", "high", 0.55],
-    ["foggy", "evening", "medium", 0.35],
-    ["foggy", "evening", "low", 0.1],
-], [Weather.distribution, Time_of_day.distribution]), name="historical_congestion_level")
+# Updated CPD for historical_congestion_level
+cpd_historical = TabularCPD(
+    variable="historical_congestion_level",
+    variable_card=3,
+    values=[
+       
+       # LOW
+       [
+         0.80, 0.10, 0.80, 0.10, 0.90, 0.15,  # sunny-morning/afternoon/evening x accident=[no,yes]
+         0.60, 0.05, 0.60, 0.05, 0.70, 0.10,  # rainy-morning/afternoon/evening x accident=[no,yes]
+         0.70, 0.10, 0.70, 0.10, 0.80, 0.15   # foggy-morning/afternoon/evening x accident=[no,yes]
+       ],
+       # MEDIUM
+       [
+         0.15, 0.20, 0.15, 0.20, 0.08, 0.25,
+         0.25, 0.15, 0.25, 0.15, 0.20, 0.20,
+         0.20, 0.15, 0.20, 0.15, 0.15, 0.20
+       ],
+       # HIGH
+       [
+         0.05, 0.70, 0.05, 0.70, 0.02, 0.60,
+         0.15, 0.80, 0.15, 0.80, 0.10, 0.70,
+         0.10, 0.75, 0.10, 0.75, 0.05, 0.65
+       ]
+    ],
+    evidence=["weather", "time_of_day", "accident"],
+    evidence_card=[3, 3, 2],
+    state_names={
+        "historical_congestion_level": ["low", "medium", "high"],
+        "weather": ["sunny", "rainy", "foggy"],
+        "time_of_day": ["morning", "afternoon", "evening"],
+        "accident": ["no", "yes"]
+    }
+)
 
-# Current congestion level node depends on Historical_congestion_level
-Current_congestion_level = Node(ConditionalProbabilityTable([
-    ["high", "high", 0.9],
-    ["high", "medium", 0.1],
-    ["high", "low", 0.0],
-    ["medium", "high", 0.6],
-    ["medium", "medium", 0.3],
-    ["medium", "low", 0.1],
-    ["low", "high", 0.3],
-    ["low", "medium", 0.4],
-    ["low", "low", 0.3],
-], [Historical_congestion_level.distribution]), name="current_congestion_level")
+cpd_current = TabularCPD(
+    variable="current_congestion_level",
+    variable_card=3,
+    values=[
+        [0.5, 0.25, 0.1],  # P(current=low | historical=low/medium/high)
+        [0.4, 0.5, 0.4],  # P(current=medium | historical=low/medium/high)
+        [0.1, 0.25, 0.5]   # P(current=high | historical=low/medium/high)
+    ],
+    evidence=["historical_congestion_level"],
+    evidence_card=[3],
+    state_names={
+        "current_congestion_level": ["low", "medium", "high"],
+        "historical_congestion_level": ["low", "medium", "high"]
+    }
+)
 
-# Create a Bayesian Network and add states
-model = BayesianNetwork("Traffic Congestion Prediction")
-model.add_states(Weather, Time_of_day, Historical_congestion_level, Current_congestion_level)
-# Add edges connecting nodes
-model.add_edge(Weather, Historical_congestion_level)
-model.add_edge(Time_of_day, Historical_congestion_level)
-model.add_edge(Historical_congestion_level, Current_congestion_level)
+# Add CPDs to the model
+model.add_cpds(cpd_weather, cpd_time_of_day, cpd_accident, cpd_historical, cpd_current)
 
-# Finalize model
-model.bake()
+# Check the model structure
+assert model.check_model()
+
+# Perform inference
+inference = VariableElimination(model)
 
 # User input
 weather_input = input("Enter the weather (sunny, rainy, foggy): ").strip().lower()
 time_of_day_input = input("Enter the time of day (morning, afternoon, evening): ").strip().lower()
+accident_input = input("Is there an accident? (yes, no): ").strip().lower()
 
 # Validate input
-if weather_input not in ["sunny", "rainy", "foggy"] or time_of_day_input not in ["morning", "afternoon", "evening"]:
-    print("Invalid input. Please enter valid weather and time of day.")
+if (weather_input not in ["sunny", "rainy", "foggy"] or 
+    time_of_day_input not in ["morning", "afternoon", "evening"] or 
+    accident_input not in ["yes", "no"]):
+    print("Invalid input. Please enter valid weather, time of day, and accident status.")
 else:
-    # Predict probabilities
-    predictions = model.predict_proba({
-        "weather": weather_input,
-        "time_of_day": time_of_day_input
-    })
+    # Query the model
+    query_result = inference.query(
+        variables=["current_congestion_level"],
+        evidence={
+            "weather": weather_input, 
+            "time_of_day": time_of_day_input, 
+            "accident": accident_input
+        }
+    )
 
     # Print results
     print("\nPredicted probabilities for Current Congestion Level:")
-    for value, probability in predictions[-1].parameters[0].items():
-        print(f"  {value}: {probability:.4f}")
+    for state, prob in enumerate(query_result.values):
+        state_name = query_result.state_names["current_congestion_level"][state]
+        print(f"  {state_name}: {prob:.4f}")
